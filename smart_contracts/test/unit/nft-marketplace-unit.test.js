@@ -43,7 +43,7 @@ const { developmentChains } = require("../../helper-hardhat-config");
       describe("listItem", function () {
         it("emits an event after listing an item", async function () {
           await expect(
-            nftMarketplace.listItem(monadNft.target, TOKEN_ID, Number(PRICE))
+            nftMarketplace.listItem(monadNft.target, TOKEN_ID,PRICE)
           ).to.emit(nftMarketplace, "ItemListed");
         });
         it("exclusively items that haven't been listed", async function () {
