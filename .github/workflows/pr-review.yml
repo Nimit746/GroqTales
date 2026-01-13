@@ -10,6 +10,7 @@ permissions:
   pull-requests: write
   checks: write
   statuses: write
+  security-events: write
 
 jobs:
   # Security and vulnerability scanning
