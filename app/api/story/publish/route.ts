@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       { 
         _id: storyId, 
         status: 'draft', 
-        authorWallet: user.wallet
+        authorWallet: user.wallet.toLowerCase()
       },
       { status: 'publishing' },
       { session: mongoSession, new: true }
