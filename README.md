@@ -38,6 +38,26 @@
 
 ---
 
+## 📋 Table of Contents
+
+- [What is GroqTales?](#what-is-groqtales)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [🛠️ Environment Configuration](#️-environment-configuration)
+- [📜 Smart Contracts](#-smart-contracts)
+- [🏗️ System Architecture](#️-system-architecture)
+- [For Developers](#for-developers)
+- [🤝 Contributing](#-contributing)
+- [Roadmap](#roadmap)
+- [Contributors](#contributors)
+- [Documentation & Architecture](#documentation--architecture)
+- [Resources](#resources)
+- [License](#license)
+- [Security](#security)
+
+---
+
 ## What is GroqTales?
 GroqTales is an open-source, AI-powered Web3 storytelling platform. Writers and artists can generate immersive narratives or comic-style stories using Groq AI, then mint and trade them as NFTs on the Monad blockchain. With a focus on ownership, authenticity, and community, GroqTales bridges the world of creative writing, generative AI, and decentralized technology.
 
