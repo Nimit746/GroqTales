@@ -222,7 +222,11 @@ export default function AIStoryGenerator({
       }
     } catch (error) {
       console.error('Error parsing draft:', error);
-      localStorage.removeItem(DRAFT_KEY);
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch (removeError) {
+        console.warn('Draft cleanup failed:', removeError);
+      }
     }
   }, []);
 
@@ -538,7 +542,11 @@ The air crackled with energy as the first shot was fired...`;
       setIsMinting(false);
       setMintSuccess(true);
       // Clear draft on successful mint
-      localStorage.removeItem(DRAFT_KEY);
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch (error) {
+        console.warn('Draft cleanup failed:', error);
+      }
       toast({
         title: 'KAZAM! NFT MINTED!',
         description: 'Your story is now eternal on the blockchain!',
