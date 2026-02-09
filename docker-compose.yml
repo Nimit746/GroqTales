@@ -1,0 +1,62 @@
+services:
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    container_name: groqtales_nextjs_dev
+    ports:
+      - '3000:3000'
+      - '5000:5000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - .env.local
+      - .env.docker
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - CHOKIDAR_USEPOLLING=true
+      - NEXT_PUBLIC_URL=http://localhost:3000
+      - MONGODB_URI=mongodb://mongodb:27017/${MONGODB_DB_NAME:-groqtales}
+    command: npm run dev
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - groqtales-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo:6.0
+    container_name: groqtales_mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    environment:
+      - MONGO_INITDB_DATABASE=${MONGODB_DB_NAME:-groqtales}
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - groqtales-network
+
+volumes:
+  mongodb_data:
+  mongodb_config:
+
+networks:
+  groqtales-network:
+    driver: bridge
