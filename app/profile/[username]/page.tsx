@@ -11,22 +11,78 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
 
-const mockStories = Array(6).fill(null).map((_, i) => ({
-  title: `The Neon Horizon ${i + 1}`,
-  excerpt: "In a world where algorithms dream of electric sheep, one droid stood apart...",
-  coverImage: "/neon-light.avif", 
-  likes: 42 + i * 5,
-  comments: 12,
-  isNFT: i % 3 === 0,
-  genre: "Sci-Fi"
-}));
+
+  const walletFromUrl = typeof params?.username === "string" ? params.username : "";
+  const isOwner = connected &&
+    account?.toLowerCase() === walletFromUrl?.toLowerCase();
+
+  useEffect(() => {
+    // 1. Create the controller
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchProfile = async () => {
+      const username = params?.username;
+
+      if(typeof username !== "string"){
+        return;
+      }
+      const wallet = username.toLowerCase();
+
+        try {
+          setLoading(true);
+          setError(false);
+
+          console.log("Fetching profile for:",wallet);
+          console.log("API:",process.env.NEXT_PUBLIC_API_URL);
+
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/profile/${walletFromUrl}`,
+             { signal }); 
+          if (!response.ok) throw new Error("Failed to load");
+          const json = await response.json();
+          if (!json.success){
+            throw new Error(json.error?.message||"Failed");
+          }
+          setProfileData(json.data);
+          //setError(false);
+        } catch (err: any) {
+          if (err.name === 'AbortError') return;
+          console.error("Profile fetch failed:",err);
+          setError(true);
+        } finally {
+          if (!signal.aborted) {
+            setLoading(false);
+          }
+        }
+      
+    };
+
+    fetchProfile();
+    return () => {
+      controller.abort();
+    };
+  }, [params]);
+  // Show Loading Skeleton while fetching
+  if (connecting || loading) {
+    return <div className="container mx-auto p-20"><Skeleton className="h-40 w-full" /></div>;
+  }
+  if (error) {
+    return <div className="p-20 text-white">Failed to load profile.</div>;
+  }
+  if (!profileData) {
+    return <div className="p-20 text-white">User not found.</div>;
+  }
+
 
 export default function ProfilePage({ params }: { params: { username: string } }) {
   const user = { ...mockUser, username: params.username };
   return (
     <main className="min-h-screen bg-black text-slate-200 pb-20">
-      <ProfileHeader user={user} />
-      
+
+      <ProfileHeader user={profileData} isOwner={isOwner} />
+
+
       <div className="container mx-auto px-4">
 
 

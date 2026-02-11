@@ -15,7 +15,15 @@ const UserSchema = new mongoose.Schema(
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true },
     phone: { type: String, default: null },
-    walletAddress: { type: String, default: null },
+
+    bio: { type: String, maxlength: 500, default: "" },
+    avatar: { type: String, default: "/avatars/default.png"},
+    badges: [{ type: String }], // Array to store earned badges like 'Alpha Tester'
+    socialLinks: {
+      twitter: String,
+      website: String
+    },
+
     role: {
       type: String,
       enum: ['user', 'admin', 'moderator'],
@@ -64,10 +72,12 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+  if (!this.password || this.isModified('password')) {
+    return;
+  }
   const salt = await bcrypt.genSalt(10); // bcrypt rounds = 10
   this.password = await bcrypt.hash(this.password, salt);
-  next();
+  
 });
 
 UserSchema.methods.comparePassword = function (plain) {
