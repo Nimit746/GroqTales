@@ -174,7 +174,7 @@ export const StoryCard = memo(function StoryCard({
                 size="icon"
                 className="h-6 w-6"
                 aria-label={`Create a story similar to ${story.title}`}
-                onClick={handleCreateSimilar}
+                onClick={(e) => { e.stopPropagation(); handleCreateSimilar(); }}
               >
                 <PenSquare className="h-3.5 w-3.5" />
               </Button>
