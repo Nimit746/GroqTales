@@ -1,12 +1,10 @@
+/**
+ * Represents the aggregated statistical data for a user's storytelling history.
+ */
 export interface StoryStats {
   totalStories: number;
-  totalTokensUsed: number;
-  averageComplexity: number;
+  totalWordCount: number; 
+  averageWordsPerStory: number;
   genreBreakdown: Record<string, number>;
   lastGeneratedDate: string;
-}
-
-export interface AnalyticsTrend {
-  date: string;
-  count: number;
 }
