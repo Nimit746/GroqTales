@@ -15,6 +15,9 @@ const logger = require('../utils/logger');
 
 const Nft = require('../models/Nft');
 const Story = require('../models/Story');
+const RoyaltyConfig = require('../../models/RoyaltyConfig').default;
+const RoyaltyTransaction = require('../../models/RoyaltyTransaction').default;
+const CreatorEarnings = require('../../models/CreatorEarnings').default;
 
 const { authRequired } = require('../middleware/auth');
 
@@ -116,7 +119,7 @@ router.get('/', async (req, res) => {
 // POST /api/v1/nft/mint
 router.post('/mint', authRequired, async (req, res) => {
   try {
-    const { storyId, metadataURI, metadata, price = 0 } = req.body;
+    const { storyId, metadataURI, metadata, price = 0, royaltyPercentage = 5, creatorWallet } = req.body;
 
     // Basic validation
     if (!storyId || !metadataURI) {
@@ -150,6 +153,8 @@ router.post('/mint', authRequired, async (req, res) => {
     // Calculate keccak256 hash of story content (using ethers v6 API)
     const storyHash = ethers.keccak256(ethers.toUtf8Bytes(story.content));
 
+    const walletAddr = creatorWallet || story.authorWallet || null;
+
     const nft = new Nft({
       tokenId,
       storyId,
@@ -161,9 +166,33 @@ router.post('/mint', authRequired, async (req, res) => {
       owner: req.user.id,
       price,
       isListed: false,
+      royaltyPercentage: Math.min(50, Math.max(0, royaltyPercentage)),
+      royaltyRecipient: walletAddr,
     });
 
     await nft.save();
+
+    // Create default royalty config for the new NFT (non-critical)
+    try {
+      if (walletAddr) {
+        const config = await RoyaltyConfig.create({
+          nftId: nft._id,
+          storyId: story._id,
+          creatorWallet: walletAddr.toLowerCase(),
+          royaltyPercentage: nft.royaltyPercentage,
+          isActive: true,
+        });
+        nft.royaltyConfigId = config._id;
+        await nft.save();
+      }
+    } catch (royaltyError) {
+      logger.error('Failed to create royalty config (non-critical)', {
+        requestId: req.id,
+        component: 'nft-royalty',
+        nftId: nft._id,
+        error: royaltyError.message,
+      });
+    }
 
     return res.status(201).json(nft);
   } catch (error) {
@@ -173,10 +202,10 @@ router.post('/mint', authRequired, async (req, res) => {
       storyId: req.body.storyId,
       userId: req.user?.id,
     });
-  
+
     return res.status(500).json({ error: 'Internal server error' });
   }
-  
+
 });
 
 // DELETE /api/v1/nft/burn/:Id
@@ -314,10 +343,53 @@ router.patch('/buy/:tokenId', authRequired, async (req, res) => {
       return res.status(400).json({ error: 'You already own this NFT' });
     }
 
+    const previousOwner = nft.owner;
+    const salePrice = nft.price;
+
     nft.owner = req.user.id;
     nft.isListed = false;
 
     await nft.save();
+
+    // Record royalty transaction (non-blocking, non-critical)
+    try {
+      const royaltyConfig = await RoyaltyConfig.findOne({
+        nftId: nft._id,
+        isActive: true,
+      });
+
+      if (royaltyConfig) {
+        const royaltyAmount = salePrice * (royaltyConfig.royaltyPercentage / 100);
+
+        await RoyaltyTransaction.create({
+          nftId: nft._id,
+          salePrice,
+          royaltyAmount,
+          royaltyPercentage: royaltyConfig.royaltyPercentage,
+          sellerWallet: req.body.sellerWallet || previousOwner.toString(),
+          buyerWallet: req.body.buyerWallet || req.user.id,
+          creatorWallet: royaltyConfig.creatorWallet,
+          txHash: req.body.txHash || null,
+          status: 'completed',
+        });
+
+        await CreatorEarnings.findOneAndUpdate(
+          { creatorWallet: royaltyConfig.creatorWallet },
+          {
+            $inc: { totalEarned: royaltyAmount, pendingPayout: royaltyAmount, totalSales: 1 },
+            $set: { lastUpdated: new Date() },
+          },
+          { upsert: true }
+        );
+      }
+    } catch (royaltyError) {
+      logger.error('Royalty tracking failed (non-critical)', {
+        requestId: req.id,
+        component: 'nft-royalty',
+        tokenId,
+        error: royaltyError.message,
+      });
+    }
 
     return res.json({
       message: `NFT with tokenId ${tokenId} has been bought from listing.`,
