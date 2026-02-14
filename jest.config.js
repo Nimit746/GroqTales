@@ -1,66 +1,57 @@
+const nextJest = require('next/jest');
+
+// Tell Next.js where the app lives
+const createJestConfig = nextJest({
+dir: './',
+});
+
 /** @type {import('jest').Config} */
-module.exports = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+const customJestConfig = {
+// Required for testing React components
+testEnvironment: 'jest-environment-jsdom',
 
-  // Use jsdom for React component tests
-  testEnvironment: 'jest-environment-jsdom',
+// Testing Library setup (matchers like toBeInTheDocument)
+setupFilesAfterEnv: ['<rootDir>/tests/setup-jest.ts'],
 
-  // Module path aliases — mirrors tsconfig.json paths.
-  // Specific paths MUST come before the catch-all to resolve correctly.
-  moduleNameMapper: {
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^@/lib/(.*)$': '<rootDir>/lib/$1',
-    '^@/types/(.*)$': '<rootDir>/types/$1',
-    '^@/hooks/(.*)$': '<rootDir>/hooks/$1',
-    '^@/utils/(.*)$': '<rootDir>/utils/$1',
-    '^@/app/(.*)$': '<rootDir>/app/$1',
-    '^@/config/(.*)$': '<rootDir>/config/$1',
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
+// Support @/ path aliases (same as tsconfig.json)
+moduleNameMapper: {
+'^@/components/(.*)$': '<rootDir>/components/$1',
+'^@/lib/(.*)$': '<rootDir>/lib/$1',
+'^@/types/(.*)$': '<rootDir>/types/$1',
+'^@/hooks/(.*)$': '<rootDir>/hooks/$1',
+'^@/utils/(.*)$': '<rootDir>/utils/$1',
+'^@/app/(.*)$': '<rootDir>/app/$1',
+'^@/config/(.*)$': '<rootDir>/config/$1',
+'^@/(.*)$': '<rootDir>/src/$1',
+},
 
-  // Test file locations — support both directories
-  testMatch: [
-    '<rootDir>/tests/**/*.test.{ts,tsx}',
-    '<rootDir>/components/__tests__/**/*.test.{ts,tsx}',
-  ],
+// Where Jest should look for tests
+testMatch: [
+'<rootDir>/tests/**/*.test.{ts,tsx}',
+'<rootDir>/components/**/**tests**/**/*.test.{ts,tsx}',
+],
 
-  // Ignore build output and node_modules
-  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
+// Ignore build + dependencies
+testPathIgnorePatterns: [
+'<rootDir>/.next/',
+'<rootDir>/node_modules/',
+],
 
-  // Transform TypeScript / TSX via ts-jest
-  transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        tsconfig: {
-          jsx: 'react-jsx',
-          esModuleInterop: true,
-          allowJs: true,
-          module: 'commonjs',
-          moduleResolution: 'node',
-          resolveJsonModule: true,
-          isolatedModules: true,
-          noEmit: true,
-          strict: false,
-          baseUrl: '.',
-          paths: {},
-        },
-        diagnostics: false,
-      },
-    ],
-  },
+// Ignore unrelated nested projects
+modulePathIgnorePatterns: [
+'<rootDir>/GroqTales/',
+'<rootDir>/src/blockchain/alchemy/node_modules/',
+],
 
-  // Don't try to transform node_modules (except specific ESM packages)
-  transformIgnorePatterns: [
-    '/node_modules/(?!(lucide-react|framer-motion)/)',
-  ],
-
-  // Coverage collection targets
-  collectCoverageFrom: [
-    'app/**/*.{ts,tsx}',
-    'components/**/*.{ts,tsx}',
-    'lib/**/*.{ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-  ],
+// Coverage (optional but useful for PR reviewers)
+collectCoverageFrom: [
+'app/**/*.{ts,tsx}',
+'components/**/*.{ts,tsx}',
+'lib/**/*.{ts,tsx}',
+'!**/*.d.ts',
+'!**/node_modules/**',
+],
 };
+
+// Export Next-aware Jest config
+module.exports = createJestConfig(customJestConfig);
