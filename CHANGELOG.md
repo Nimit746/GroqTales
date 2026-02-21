@@ -7,11 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Supported Versions
 
-Active full support: 1.3.5 (latest), 1.3.0 (previous). Security maintenance (critical fixes only): 1.1.0. All versions < 1.1.0 are End of Security Support (EoSS). See `SECURITY.md` for the evolving support policy.
+Active full support: 1.3.6 (latest), 1.3.5 (previous). Security maintenance (critical fixes only): 1.1.0. All versions < 1.1.0 are End of Security Support (EoSS). See `SECURITY.md` for the evolving support policy.
 
 ## [Live]
 
-### 1.3.5
+## [1.3.5] - 2026-02-21
+
+### Homepage & Footer UI Refinements — Readability, Layout, and Spline Background
+
+#### Changed
+- **Spline 3D Background**: Transitioned from hero-only to a `fixed` full-page background, visible through semi-transparent sections.
+- **CTA Section**: Removed gradient background, simplified to `bg-background/90` with backdrop-blur.
+- **CTA Button**: Removed sparkle icon, enforced pure comic-style theme with Bangers font.
+- **Neon Sign**: Optimized glow radii and colors for significantly improved readability.
+- **Footer Brand**: Replaced logo image/container with bold italic "GroqTales" branded text.
+- **Footer Layout**: Moved copyright and status info below the neon sign for a more balanced design.
+
+---
+
+## [1.3.5] - 2026-02-21
 ### Security Policy Refresh — 2026-02-21
 
 - **Updated `SECURITY.md`** to reflect current version matrix (1.3.5 latest, 1.3.0 previous, 1.1.0 maintenance, < 1.1.0 EoSS)
