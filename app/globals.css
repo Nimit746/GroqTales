@@ -265,9 +265,15 @@
 
   /* Comic Glow Effect for UX Polish */
   @keyframes comic-glow {
-    0% { box-shadow: 6px 6px 0px 0px var(--foreground); }
-    50% { box-shadow: 0px 0px 20px 5px var(--primary); }
-    100% { box-shadow: 6px 6px 0px 0px var(--foreground); }
+    0% {
+      box-shadow: 6px 6px 0px 0px var(--foreground);
+    }
+    50% {
+      box-shadow: 0px 0px 20px 5px var(--primary);
+    }
+    100% {
+      box-shadow: 6px 6px 0px 0px var(--foreground);
+    }
   }
 
   .comic-card:hover {
@@ -486,8 +492,15 @@
 
   /* Performance: CSS twinkle animation for stars (replaces framer-motion per-star animations) */
   @keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
+    0%,
+    100% {
+      opacity: 0.2;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
   }
 
   .animate-twinkle {
