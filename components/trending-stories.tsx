@@ -94,6 +94,7 @@ export function TrendingStories() {
               </Button>
             </Link>
             <Button
+              variant="outline"
               onClick={() => handleCreateSimilar('fantasy')}
               className="w-full md:w-auto theme-gradient-bg text-black dark:text-white"
             >
@@ -116,7 +117,7 @@ export function TrendingStories() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {stories.map((story, index) => (
               <motion.div
                 key={story.id}

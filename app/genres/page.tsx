@@ -217,14 +217,14 @@ const genreData = [
 
 export default function GenresPage() {
   return (
-    <div className="py-12 min-h-screen">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <div className="pt-16 pb-0 min-h-screen">
+      <div className="container mx-auto px-4 max-w-7xl">
         {/* Hero Section */}
         <div className="mb-16 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-heading">
             Explore Story Genres
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-md text-muted-foreground max-w-3xl mx-auto mb-8 tracking-wide">
             Discover the diverse world of storytelling genres, each offering a
             unique perspective and set of themes. Science Fiction explores
             futuristic visions and advanced technology, while Fantasy invites
@@ -235,7 +235,7 @@ export default function GenresPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
           {genreData.map((genre, index) => (
             <Card
               key={index}
@@ -253,9 +253,9 @@ export default function GenresPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="mb-4">
+                <div className="mb-6">
                   <span className="text-sm font-medium">Popular Elements:</span>
-                  <div className="flex flex-wrap gap-2 mt-2">
+                  <div className="flex flex-wrap gap-3 mt-4">
                     {genre.popularElements.map((element, idx) => (
                       <Badge key={idx} variant="secondary">
                         {element}
@@ -265,7 +265,7 @@ export default function GenresPage() {
                 </div>
                 <div>
                   <span className="text-sm font-medium">Famous Works:</span>
-                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                  <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
                     {genre.famousWorks.map((work, idx) => (
                       <li key={idx}>• {work}</li>
                     ))}
@@ -277,11 +277,11 @@ export default function GenresPage() {
         </div>
 
         {/* Genre Combinations Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center">
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-3 text-center">
             Genre Combinations
           </h2>
-          <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-8">
+          <p className="text-center text-muted-foreground max-w-3xl mx-auto mb-14">
             The most innovative stories often blend elements from multiple
             genres. Here are some popular genre combinations that have produced
             compelling narratives.
@@ -383,13 +383,13 @@ export default function GenresPage() {
           <h2 className="text-2xl font-bold mb-4 text-center">
             Finding Your Genre
           </h2>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-6">
+          <p className="text-muted-foreground text-center mx-auto mb-10">
             Not sure which genre best fits your story idea? Here are some
             questions to help you decide:
           </p>
 
-          <div className="space-y-4 max-w-3xl mx-auto">
-            <div className="p-4 border border-border rounded-md bg-card">
+          <div className="space-y-5 max-w-4xl mx-auto">
+            <div className="p-5 border border-border rounded-md bg-card">
               <p className="font-medium">
                 What elements excite you most as a reader or viewer?
               </p>

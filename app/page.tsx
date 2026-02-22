@@ -38,16 +38,16 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(#000_1px,transparent_1px)] dark:bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03] pointer-events-none" />
 
       {/* Hero Section */}
-      <section className="relative py-24 border-b-8 border-foreground bg-yellow-400 dark:bg-slate-900/80 dark:backdrop-blur-sm overflow-hidden transition-colors duration-500">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+      <section className="relative py-24 pt-7 border-b-8 border-foreground bg-yellow-400 dark:bg-slate-900/80 dark:backdrop-blur-sm overflow-hidden transition-colors duration-500">
+        <div className="container mx-auto px-10 relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-12">
             <div className="lg:w-1/2 space-y-8">
               <motion.div
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-block bg-card border-4 border-foreground px-6 py-3 shadow-[8px_8px_0px_0px_var(--shadow-color)] transform -rotate-2"
               >
-                <span className="font-black text-xl md:text-2xl text-foreground uppercase tracking-widest">
+                <span className="font-black text-xl text-foreground uppercase tracking-widest">
                   The Future of Storytelling
                 </span>
               </motion.div>
@@ -56,7 +56,7 @@ export default function Home() {
                 initial={false}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="text-6xl md:text-8xl font-black text-foreground uppercase leading-none [text-shadow:4px_4px_0px_#fff,8px_8px_0px_#000] dark:[text-shadow:0_0_15px_rgba(59,130,246,0.4),0_0_30px_rgba(139,92,246,0.2)]"
+                className="text-6xl md:text-[85px] font-black text-foreground uppercase leading-none [text-shadow:4px_4px_0px_#fff,8px_8px_0px_#000] dark:[text-shadow:0_0_15px_rgba(59,130,246,0.4),0_0_30px_rgba(139,92,246,0.2)]"
               >
                 Create <br />
                 <span className="text-white dark:bg-gradient-to-r dark:from-cyan-400 dark:to-blue-500 dark:bg-clip-text dark:text-transparent [text-shadow:4px_4px_0px_#000] dark:[text-shadow:none] dark:drop-shadow-[0_0_12px_rgba(34,211,238,0.6)]">
@@ -69,7 +69,7 @@ export default function Home() {
                 initial={false}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-2xl font-bold text-foreground border-l-8 border-foreground pl-6 py-4 bg-card/80 shadow-[4px_4px_0px_0px_var(--shadow-color)]"
+                className="text-xl font-bold text-foreground border-l-8 border-foreground pl-6 py-4 pt-2 bg-card/80 shadow-[4px_4px_0px_0px_var(--shadow-color)]"
               >
                 Unleash your imagination with AI. Turn your stories into
                 valuable NFTs on the Monad blockchain.
@@ -84,7 +84,7 @@ export default function Home() {
                 <Link href="/create/ai-story">
                   <Button
                     size="lg"
-                    className="bg-red-500 text-white border-4 border-foreground shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[12px_12px_0px_0px_var(--shadow-color)] hover:-translate-y-1 transition-all text-xl font-black uppercase px-8 py-6 h-auto rounded-none"
+                    className="bg-red-500 text-white border-4 border-foreground shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[12px_12px_0px_0px_var(--shadow-color)] hover:-translate-y-1 transition-all text-lg font-black uppercase px-8 py-4 h-auto rounded-none"
                   >
                     <PenSquare className="mr-3 h-6 w-6" />
                     Start Creating
@@ -95,7 +95,7 @@ export default function Home() {
                   <Button
                     onClick={connectWallet}
                     size="lg"
-                    className="bg-card text-foreground border-4 border-foreground shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[12px_12px_0px_0px_var(--shadow-color)] hover:-translate-y-1 transition-all text-xl font-black uppercase px-8 py-6 h-auto rounded-none"
+                    className="bg-card text-foreground border-4 border-foreground shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[12px_12px_0px_0px_var(--shadow-color)] hover:-translate-y-1 transition-all text-lg font-black uppercase px-8 py-4 h-auto rounded-none"
                   >
                     <Wallet className="mr-3 h-6 w-6" />
                     Connect Wallet
@@ -104,7 +104,7 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <div className="lg:w-1/2 relative">
+            <div className="w-full max-w-md relative">
               <motion.div
                 animate={{ rotate: [2, -2, 2] }}
                 transition={{
@@ -146,7 +146,7 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-20 bg-card dark:bg-slate-900/40 dark:backdrop-blur-md border-b-8 border-foreground transition-colors duration-500">
+      <section className="py-20 bg-card pb-30 dark:bg-slate-900/40 dark:backdrop-blur-md border-b-8 border-foreground transition-colors duration-500">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-7xl font-black uppercase mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-300 dark:to-white bg-clip-text text-transparent [text-shadow:4px_4px_0px_rgba(0,0,0,0.05)] dark:[text-shadow:4px_4px_0px_rgba(255,255,255,0.05)]">
@@ -178,7 +178,7 @@ export default function Home() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.05, rotate: 1 }}
-                className={`${feature.color} border-4 border-foreground p-8 shadow-[12px_12px_0px_0px_var(--shadow-color)]`}
+                className={`${feature.color} w-full max-w-sm border-4 border-foreground p-8 shadow-[12px_12px_0px_0px_var(--shadow-color)]`}
               >
                 <div className="bg-card border-4 border-foreground w-20 h-20 flex items-center justify-center mb-6 shadow-[4px_4px_0px_0px_var(--shadow-color)]">
                   {feature.icon}
@@ -198,7 +198,7 @@ export default function Home() {
       {/* Trending Section */}
       <section className="py-20 bg-pink-100 dark:bg-slate-900/60 dark:backdrop-blur-sm border-b-8 border-foreground transition-colors duration-500">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col gap-4 items-start mb-12 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4 items-start mb-12 px-3 md:flex-row md:items-center md:justify-between">
             <h2 className="text-2xl md:text-4xl font-black uppercase bg-card border-4 border-foreground px-6 py-2 shadow-[6px_6px_0px_0px_var(--shadow-color)]">
               Trending Now
             </h2>
@@ -219,7 +219,7 @@ export default function Home() {
             Ready to Start?
           </h2>
           <Link href="/create/ai-story">
-            <Button className="w-full md:w-auto bg-yellow-400 dark:bg-yellow-600 text-foreground border-4 border-foreground text-lg md:text-2xl font-black uppercase px-6 md:px-12 py-4 md:py-8 h-auto shadow-[12px_12px_0px_0px_#000] hover:shadow-[16px_16px_0px_0px_#000] hover:-translate-y-1 transition-all rounded-none">
+            <Button className="w-full md:w-auto bg-yellow-400 dark:bg-yellow-600 text-foreground border-4 border-foreground text-lg md:text-2xl font-black uppercase px-6 md:px-10 py-4 md:py-6 h-auto shadow-[12px_12px_0px_0px_#000] hover:shadow-[16px_16px_0px_0px_#000] hover:-translate-y-1 transition-all rounded-none">
               Create Your Story
             </Button>
           </Link>

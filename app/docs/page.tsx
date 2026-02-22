@@ -22,15 +22,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Floating GitHub button component
-const FloatingGithub = () => (
-  <Link
-    href="https://github.com/Drago-03/GroqTales.git"
-    target="_blank"
-    className="fixed bottom-24 right-6 p-3 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50"
-  >
-    <Github className="w-6 h-6 text-white" />
-  </Link>
-);
+import { FloatingGithub } from '../terms/page';
 
 // Floating doodle elements
 const FloatingDoodles = () => (
@@ -49,7 +41,7 @@ export default function DocsPage() {
 
       <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-3xl mx-auto mb-12 text-center">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold mb-4">
             Documentation & Resources
           </h1>
           <p className="text-muted-foreground text-lg">
@@ -60,15 +52,15 @@ export default function DocsPage() {
 
         <Tabs defaultValue="getting-started" className="space-y-8">
           <TabsList className="grid grid-cols-3 max-w-2xl mx-auto">
-            <TabsTrigger value="getting-started" className="space-x-2">
+            <TabsTrigger value="getting-started" className="space-x-2 hover:-translate-y-1 transition-transform duration-200">
               <BookOpen className="w-4 h-4" />
               <span>Getting Started</span>
             </TabsTrigger>
-            <TabsTrigger value="wallet" className="space-x-2">
+            <TabsTrigger value="wallet" className="space-x-2 hover:-translate-y-1 transition-transform duration-200">
               <Wallet className="w-4 h-4" />
               <span>Wallet Setup</span>
             </TabsTrigger>
-            <TabsTrigger value="faq" className="space-x-2">
+            <TabsTrigger value="faq" className="space-x-2 hover:-translate-y-1 transition-transform duration-200">
               <HelpCircle className="w-4 h-4" />
               <span>FAQ</span>
             </TabsTrigger>
@@ -82,7 +74,7 @@ export default function DocsPage() {
                   Learn the basics of using GroqTales
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-10">
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold">
                     1. Create Your Account
