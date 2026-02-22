@@ -163,15 +163,16 @@ export default function Home() {
             variants={fadeUp}
             className="flex flex-wrap gap-4 justify-center pointer-events-auto"
           >
-            <Link href="/create/ai-story">
-              <Button
-                size="lg"
-                className="bg-[var(--comic-red)] hover:bg-[var(--comic-red)]/90 text-white border-4 border-foreground shadow-[6px_6px_0px_0px_var(--shadow-color)] hover:shadow-[3px_3px_0px_0px_var(--shadow-color)] hover:-translate-y-0.5 transition-all duration-200 text-base font-black uppercase px-8 py-5 h-auto rounded-none"
-              >
+            <Button
+              asChild
+              size="lg"
+              className="bg-[var(--comic-red)] hover:bg-[var(--comic-red)]/90 text-white border-4 border-foreground shadow-[6px_6px_0px_0px_var(--shadow-color)] hover:shadow-[3px_3px_0px_0px_var(--shadow-color)] hover:-translate-y-0.5 transition-all duration-200 text-base font-black uppercase px-8 py-5 h-auto rounded-none"
+            >
+              <Link href="/create/ai-story">
                 <PenSquare className="mr-2 h-5 w-5" />
                 Start Creating
-              </Button>
-            </Link>
+              </Link>
+            </Button>
 
             {!account && (
               <Button
@@ -356,11 +357,11 @@ export default function Home() {
               </motion.p>
             </div>
             <motion.div variants={fadeUp}>
-              <Link href="/nft-gallery">
-                <Button className="bg-foreground text-background border-4 border-foreground hover:bg-foreground/90 font-black uppercase rounded-none shadow-[4px_4px_0px_0px_var(--shadow-color)] hover:-translate-y-0.5 transition-all duration-200">
+              <Button asChild className="bg-foreground text-background border-4 border-foreground hover:bg-foreground/90 font-black uppercase rounded-none shadow-[4px_4px_0px_0px_var(--shadow-color)] hover:-translate-y-0.5 transition-all duration-200">
+                <Link href="/nft-gallery">
                   View All <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </motion.div>
           </motion.div>
           <TrendingStories />
@@ -456,11 +457,11 @@ export default function Home() {
               Join thousands of creators minting their stories as NFTs on GroqTales.
             </motion.p>
             <motion.div variants={fadeUp}>
-              <Link href="/create/ai-story">
-                <Button className="comic-display bg-[var(--comic-yellow)] text-[#1a1a2e] border-4 border-foreground text-lg md:text-2xl font-black uppercase px-8 md:px-12 py-5 md:py-7 h-auto shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[4px_4px_0px_0px_var(--shadow-color)] hover:-translate-y-1 active:shadow-none active:translate-y-0.5 transition-all duration-200 rounded-none tracking-wider">
+              <Button asChild className="comic-display bg-[var(--comic-yellow)] text-[#1a1a2e] border-4 border-foreground text-lg md:text-2xl font-black uppercase px-8 md:px-12 py-5 md:py-7 h-auto shadow-[8px_8px_0px_0px_var(--shadow-color)] hover:shadow-[4px_4px_0px_0px_var(--shadow-color)] hover:-translate-y-1 active:shadow-none active:translate-y-0.5 transition-all duration-200 rounded-none tracking-wider">
+                <Link href="/create/ai-story">
                   Start Your Story
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </motion.div>
           </motion.div>
         </div>

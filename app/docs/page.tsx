@@ -92,12 +92,15 @@ function FaqItem({
   question,
   answer,
   emoji,
+  index,
 }: {
   question: string;
   answer: string;
   emoji: string;
+  index: number;
 }) {
   const [open, setOpen] = useState(false);
+  const panelId = `faq-panel-${index}`;
   return (
     <div
       className="border-4 border-foreground bg-card overflow-hidden transition-all"
@@ -106,6 +109,8 @@ function FaqItem({
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center gap-3 p-5 text-left hover:bg-muted/30 transition-colors"
+        aria-expanded={open}
+        aria-controls={panelId}
       >
         <span className="text-2xl">{emoji}</span>
         <span className="flex-1 font-black text-sm uppercase text-foreground">{question}</span>
@@ -114,7 +119,7 @@ function FaqItem({
         />
       </button>
       {open && (
-        <div className="px-5 pb-5 border-t-2 border-foreground/10 pt-4">
+        <div id={panelId} className="px-5 pb-5 border-t-2 border-foreground/10 pt-4">
           <p className="text-sm text-muted-foreground font-bold leading-relaxed">{answer}</p>
         </div>
       )}
@@ -377,31 +382,37 @@ export default function DocsPage() {
 
           <div className="space-y-4">
             <FaqItem
+              index={0}
               emoji="🤖"
               question="What is GroqTales?"
               answer="GroqTales is a platform that combines AI-powered storytelling with blockchain technology. Create unique stories using Groq's lightning-fast AI, mint them as NFTs on the Monad blockchain, and share them with a global community of readers and collectors."
             />
             <FaqItem
+              index={1}
               emoji="⚡"
               question="How does story generation work?"
               answer="Our platform uses Groq's advanced AI models to generate unique stories based on your prompts and preferences. Choose from 12 genres, customize over 70 parameters (tone, length, characters, setting, etc.), and get your story in seconds. You can edit and refine the output before publishing or minting."
             />
             <FaqItem
+              index={2}
               emoji="💰"
               question="What are the fees?"
               answer="Story generation is completely free — no limits! When minting NFTs, you pay only the Monad network gas fees, which are typically very low (fractions of a cent). We take a 5% commission only on secondary NFT sales."
             />
             <FaqItem
+              index={3}
               emoji="🏪"
               question="How do I sell my story NFTs?"
               answer="After minting, your NFT appears in your profile. You can list it for sale on our marketplace by setting a price in MONAD tokens. Buyers purchase directly through the platform, and you receive payment instantly. You also earn royalties on future resales."
             />
             <FaqItem
+              index={4}
               emoji="🔒"
               question="Is my content safe?"
               answer="Absolutely. Once minted as an NFT, your story is permanently recorded on the Monad blockchain. You retain full copyright and ownership. The blockchain provides tamper-proof provenance — nobody can claim your work as their own."
             />
             <FaqItem
+              index={5}
               emoji="🌐"
               question="Do I need crypto experience?"
               answer="Not at all! You can start creating stories without any crypto. When you're ready to mint, our wallet setup guide walks you through everything step-by-step. The Monad blockchain makes the process fast and affordable."
@@ -432,7 +443,7 @@ export default function DocsPage() {
                   className="bg-white text-foreground border-2 border-foreground font-black uppercase rounded-none text-xs"
                   style={{ boxShadow: '3px 3px 0px 0px rgba(0,0,0,0.3)' }}
                 >
-                  <Link href="https://github.com/IndieHub25/GroqTales" target="_blank">
+                  <Link href="https://github.com/IndieHub25/GroqTales" target="_blank" rel="noopener noreferrer">
                     <Github className="mr-2 w-4 h-4" /> GitHub
                   </Link>
                 </Button>

@@ -104,15 +104,16 @@ export function TrendingStories() {
             >
               Retry
             </Button>
-            <Link href="/create/ai-story">
-              <Button
-                variant="outline"
-                className="border-4 border-foreground shadow-[4px_4px_0px_0px_var(--shadow-color)] font-black uppercase rounded-none"
-              >
+            <Button
+              asChild
+              variant="outline"
+              className="border-4 border-foreground shadow-[4px_4px_0px_0px_var(--shadow-color)] font-black uppercase rounded-none"
+            >
+              <Link href="/create/ai-story">
                 <PenSquare className="mr-2 h-4 w-4" />
                 Create a Story
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -144,12 +145,12 @@ export function TrendingStories() {
             <p className="text-muted-foreground font-bold mb-6">
               Be the first to create a story on GroqTales!
             </p>
-            <Link href="/create/ai-story">
-              <Button className="bg-[var(--comic-red)] text-white border-4 border-foreground shadow-[4px_4px_0px_0px_var(--shadow-color)] font-black uppercase rounded-none">
+            <Button asChild className="bg-[var(--comic-red)] text-white border-4 border-foreground shadow-[4px_4px_0px_0px_var(--shadow-color)] font-black uppercase rounded-none">
+              <Link href="/create/ai-story">
                 <PenSquare className="mr-2 h-4 w-4" />
                 Create Your First Story
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -343,13 +343,15 @@ export default function GenresPage() {
                   <button
                     onClick={() => setExpandedGenre(isExpanded ? null : genre.name)}
                     className="flex items-center gap-1 text-xs font-black uppercase text-[var(--comic-purple)] hover:underline mt-2"
+                    aria-expanded={isExpanded}
+                    aria-controls={`${genre.name.toLowerCase().replace(/\s+/g, '-')}-works`}
                   >
                     {isExpanded ? 'Show Less' : 'Famous Works'}
                     {isExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                   </button>
 
                   {isExpanded && (
-                    <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground border-t-2 border-foreground/10 pt-3">
+                    <ul id={`${genre.name.toLowerCase().replace(/\s+/g, '-')}-works`} className="mt-3 space-y-1.5 text-sm text-muted-foreground border-t-2 border-foreground/10 pt-3">
                       {genre.famousWorks.map((work) => (
                         <li key={work} className="flex items-center gap-2">
                           <BookOpen className="w-3 h-3 text-[var(--comic-red)]" />
@@ -423,7 +425,7 @@ export default function GenresPage() {
             <div className="absolute top-12 right-20 w-8 h-8 border-3 border-white/15 rounded-full" />
             <div className="absolute bottom-2 left-12 w-10 h-10 border-3 border-white/10 rounded-full" />
             <div className="absolute top-2 left-1/3 text-4xl opacity-20">🎯</div>
-            <div className="absolute bottom-2 right-1/4 text-3xl opacity-15">🔮</div>
+            <div className="absolute bottom-2 right-1/4 text-3xl opacity-[0.15]">🔮</div>
 
             <div className="relative z-10 text-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm text-xs font-black uppercase tracking-widest mb-3">

@@ -129,6 +129,11 @@ export async function GET(req: Request) {
     if (!stories || !Array.isArray(stories) || stories.length === 0) {
       const start = (page - 1) * limit;
       stories = FALLBACK_STORIES.slice(start, start + limit);
+
+      return NextResponse.json({
+        data: stories,
+        meta: { page, limit, type: 'fallback' }
+      });
     }
 
     return NextResponse.json({

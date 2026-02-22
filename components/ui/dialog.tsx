@@ -43,10 +43,6 @@ const DialogContent = React.forwardRef<
       )}
       {...props}
     >
-      {/* Hidden description to satisfy Radix aria-describedby requirement */}
-      <DialogPrimitive.Description className="sr-only">
-        Dialog content
-      </DialogPrimitive.Description>
       {children}
       <DialogPrimitive.Close className="absolute right-4 top-5 rounded-none border-2 border-black bg-white p-1 opacity-100 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-red-500 hover:text-white transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none z-50">
         <X className="h-4 w-4 stroke-[3px]" />
